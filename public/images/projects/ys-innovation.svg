@@ -1,0 +1,31 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A0F1D"/>
+  <circle cx="400" cy="225" r="260" fill="#6366F1" fill-opacity="0.12" filter="blur(80px)"/>
+  
+  <!-- Subtle Grid -->
+  <g opacity="0.15">
+    <path d="M0 75H800M0 150H800M0 225H800M0 300H800M0 375H800" stroke="#334155" stroke-width="1"/>
+    <path d="M100 0V450M200 0V450M300 0V450M400 0V450M500 0V450M600 0V450M700 0V450" stroke="#334155" stroke-width="1"/>
+  </g>
+
+  <!-- Corporate Showcase Graphic -->
+  <rect x="180" y="80" width="440" height="270" rx="16" fill="#0E1626" stroke="#1E293B" stroke-width="2"/>
+  <rect x="180" y="80" width="440" height="40" rx="16" fill="#141E34"/>
+  <circle cx="210" cy="100" r="5" fill="#EF4444"/>
+  <circle cx="225" cy="100" r="5" fill="#F59E0B"/>
+  <circle cx="240" cy="100" r="5" fill="#10B981"/>
+
+  <rect x="220" y="145" width="360" height="60" rx="8" fill="#162238" stroke="#312E81"/>
+  <text x="240" y="175" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#A5B4FC">YS Innovation Corporate Website</text>
+  <text x="240" y="195" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">Service presentations, products, and brand identity</text>
+
+  <rect x="220" y="225" width="170" height="85" rx="8" fill="#162238" stroke="#1E293B"/>
+  <text x="240" y="255" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#38BDF8">Modern UI</text>
+  <text x="240" y="280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#64748B">React &amp; Tailwind</text>
+
+  <rect x="410" y="225" width="170" height="85" rx="8" fill="#162238" stroke="#1E293B"/>
+  <text x="430" y="255" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#34D399">Responsive</text>
+  <text x="430" y="280" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#64748B">Mobile First Layout</text>
+
+  <text x="400" y="390" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#F8FAFC" letter-spacing="1">YS INNOVATION COMPANY WEBSITE</text>
+</svg>

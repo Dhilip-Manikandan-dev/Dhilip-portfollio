@@ -1,0 +1,32 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A0F1D"/>
+  <circle cx="250" cy="225" r="240" fill="#06B6D4" fill-opacity="0.1" filter="blur(80px)"/>
+  <circle cx="550" cy="225" r="240" fill="#6366F1" fill-opacity="0.12" filter="blur(80px)"/>
+  
+  <!-- Subtle Grid -->
+  <g opacity="0.15">
+    <path d="M0 75H800M0 150H800M0 225H800M0 300H800M0 375H800" stroke="#334155" stroke-width="1"/>
+    <path d="M100 0V450M200 0V450M300 0V450M400 0V450M500 0V450M600 0V450M700 0V450" stroke="#334155" stroke-width="1"/>
+  </g>
+
+  <!-- Dual Device Representation: Web & Mobile -->
+  <!-- Web Screen -->
+  <rect x="140" y="100" width="360" height="230" rx="12" fill="#0E1626" stroke="#1E293B" stroke-width="2"/>
+  <rect x="140" y="100" width="360" height="30" rx="12" fill="#141E34"/>
+  <circle cx="160" cy="115" r="4" fill="#EF4444"/>
+  <circle cx="172" cy="115" r="4" fill="#F59E0B"/>
+  <circle cx="184" cy="115" r="4" fill="#10B981"/>
+  <text x="320" y="180" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#38BDF8">Next.js Web Portal</text>
+  <rect x="170" y="210" width="140" height="40" rx="6" fill="#1A2642"/>
+  <rect x="330" y="210" width="140" height="40" rx="6" fill="#1A2642"/>
+
+  <!-- Phone Screen overlapping -->
+  <rect x="520" y="70" width="160" height="280" rx="24" fill="#0E1626" stroke="#6366F1" stroke-width="2.5"/>
+  <rect x="565" y="80" width="70" height="8" rx="4" fill="#1E293B"/>
+  <circle cx="600" cy="330" r="8" fill="#1E293B"/>
+  <text x="600" y="160" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#818CF8">React</text>
+  <text x="600" y="180" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#818CF8">Native</text>
+  <rect x="545" y="210" width="110" height="60" rx="8" fill="#162238"/>
+
+  <text x="400" y="395" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#F8FAFC" letter-spacing="1">HIREZ WEB &amp; MOBILE PLATFORM</text>
+</svg>

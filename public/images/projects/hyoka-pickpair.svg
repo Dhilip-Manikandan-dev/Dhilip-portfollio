@@ -1,0 +1,29 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A0F1D"/>
+  <circle cx="400" cy="225" r="260" fill="#8B5CF6" fill-opacity="0.12" filter="blur(80px)"/>
+  
+  <!-- Subtle Grid -->
+  <g opacity="0.15">
+    <path d="M0 75H800M0 150H800M0 225H800M0 300H800M0 375H800" stroke="#334155" stroke-width="1"/>
+    <path d="M100 0V450M200 0V450M300 0V450M400 0V450M500 0V450M600 0V450M700 0V450" stroke="#334155" stroke-width="1"/>
+  </g>
+
+  <!-- Digital Portfolio Graphic -->
+  <rect x="180" y="80" width="440" height="270" rx="16" fill="#0E1626" stroke="#1E293B" stroke-width="2"/>
+  <rect x="180" y="80" width="440" height="40" rx="16" fill="#141E34"/>
+  <circle cx="210" cy="100" r="5" fill="#EF4444"/>
+  <circle cx="225" cy="100" r="5" fill="#F59E0B"/>
+  <circle cx="240" cy="100" r="5" fill="#10B981"/>
+
+  <rect x="220" y="145" width="170" height="165" rx="10" fill="#162238" stroke="#1E293B"/>
+  <rect x="240" y="165" width="130" height="70" rx="6" fill="#1E2D4A"/>
+  <text x="240" y="260" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#C4B5FD">Hyoka Portal</text>
+  <text x="240" y="282" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">Portfolio Website</text>
+
+  <rect x="410" y="145" width="170" height="165" rx="10" fill="#162238" stroke="#1E293B"/>
+  <rect x="430" y="165" width="130" height="70" rx="6" fill="#1E2D4A"/>
+  <text x="430" y="260" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#38BDF8">Pickpair Hub</text>
+  <text x="430" y="282" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">Company Products</text>
+
+  <text x="400" y="390" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#F8FAFC" letter-spacing="1">HYOKA &amp; PICKPAIR WEBSITES</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#0A0F1D"/>
+  <circle cx="400" cy="225" r="280" fill="#4F46E5" fill-opacity="0.12" filter="blur(80px)"/>
+  <circle cx="650" cy="120" r="180" fill="#06B6D4" fill-opacity="0.1" filter="blur(70px)"/>
+  
+  <!-- Subtle Grid Pattern -->
+  <g opacity="0.15">
+    <path d="M0 75H800M0 150H800M0 225H800M0 300H800M0 375H800" stroke="#334155" stroke-width="1"/>
+    <path d="M100 0V450M200 0V450M300 0V450M400 0V450M500 0V450M600 0V450M700 0V450" stroke="#334155" stroke-width="1"/>
+  </g>
+
+  <!-- Card Graphic -->
+  <rect x="180" y="90" width="440" height="270" rx="16" fill="#0E1626" stroke="#1E293B" stroke-width="2"/>
+  <rect x="180" y="90" width="440" height="40" rx="16" fill="#141E34"/>
+  <circle cx="210" cy="110" r="5" fill="#EF4444"/>
+  <circle cx="225" cy="110" r="5" fill="#F59E0B"/>
+  <circle cx="240" cy="110" r="5" fill="#10B981"/>
+  
+  <!-- Database & Server Symbolism -->
+  <rect x="220" y="155" width="360" height="45" rx="8" fill="#162238" stroke="#312E81"/>
+  <text x="240" y="183" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#818CF8">Next.js &amp; PostgreSQL Service</text>
+  
+  <rect x="220" y="215" width="170" height="90" rx="8" fill="#162238" stroke="#1E293B"/>
+  <text x="235" y="245" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">Aurora RDS</text>
+  <text x="235" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#38BDF8">AWS Cloud</text>
+
+  <rect x="410" y="215" width="170" height="90" rx="8" fill="#162238" stroke="#1E293B"/>
+  <text x="425" y="245" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">Next.js Engine</text>
+  <text x="425" y="275" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#34D399">SSR &amp; API Routes</text>
+
+  <text x="400" y="400" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#F8FAFC" letter-spacing="1">SRI KALIYAMMAL WEB APP</text>
+</svg>
