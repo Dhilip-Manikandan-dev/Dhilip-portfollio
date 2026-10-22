@@ -15,10 +15,7 @@ export function Preloader() {
   const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {
-    if (!shouldRun) {
-      setIsVisible(false);
-      return;
-    }
+    if (!shouldRun) return;
 
     const totalDurationMs = configuredDelay * 1000;
     const intervalMs = 20;
@@ -55,7 +52,7 @@ export function Preloader() {
     };
   }, [configuredDelay, shouldRun]);
 
-  if (!isVisible) return null;
+  if (!shouldRun || !isVisible) return null;
 
   return (
     <div

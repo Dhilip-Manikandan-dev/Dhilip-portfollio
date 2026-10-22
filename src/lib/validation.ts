@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Resolver } from "react-hook-form";
+import type { Resolver, FieldValues, FieldErrors } from "react-hook-form";
 
 /**
  * Contact Form Zod Schema
@@ -41,9 +41,9 @@ export type ContactFormValues = z.infer<typeof contactFormSchema>;
  * Universal Zod Resolver for React Hook Form.
  * Seamlessly handles Zod 3 and Zod 4 error structures without throwing unhandledRejection errors.
  */
-export const zodFormResolver = <T extends z.ZodTypeAny>(
-  schema: T
-): Resolver<z.infer<T>> => {
+export const zodFormResolver = <TFieldValues extends FieldValues = FieldValues>(
+  schema: z.ZodType<TFieldValues>
+): Resolver<TFieldValues> => {
   return async (values) => {
     const result = schema.safeParse(values);
     if (result.success) {
@@ -53,13 +53,17 @@ export const zodFormResolver = <T extends z.ZodTypeAny>(
       };
     }
 
-    const issues = (result.error as any).issues || (result.error as any).errors || [];
-    const errors: Record<string, any> = {};
+    const errorRecord = result.error as unknown as {
+      issues?: Array<{ path?: (string | number)[]; code?: string; message: string }>;
+      errors?: Array<{ path?: (string | number)[]; code?: string; message: string }>;
+    };
+    const issues = errorRecord.issues || errorRecord.errors || [];
+    const errors: FieldErrors<TFieldValues> = {};
 
     for (const issue of issues) {
       const path = issue.path && issue.path.length > 0 ? issue.path.join(".") : "_form";
-      if (!errors[path]) {
-        errors[path] = {
+      if (!errors[path as keyof FieldErrors<TFieldValues>]) {
+        (errors as Record<string, unknown>)[path] = {
           type: issue.code || "validation",
           message: issue.message,
         };
@@ -67,7 +71,7 @@ export const zodFormResolver = <T extends z.ZodTypeAny>(
     }
 
     return {
-      values: {},
+      values: {} as Record<string, never>,
       errors,
     };
   };

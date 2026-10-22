@@ -20,20 +20,71 @@ export interface EmailDispatchResult {
 }
 
 /**
+ * Validates and provides diagnostic info on SMTP environment variables.
+ */
+export function getSmtpDiagnostic(): { isConfigured: boolean; error?: string } {
+  const rawHost = process.env.SMTP_HOST?.trim();
+  const rawUser = process.env.SMTP_USER?.trim();
+  const rawPass = process.env.SMTP_PASS?.trim();
+
+  // If none are provided at all
+  if (!rawHost && !rawUser && !rawPass) {
+    return {
+      isConfigured: false,
+      error: "SMTP is not configured in .env.local. Please configure SMTP_HOST, SMTP_USER, and SMTP_PASS.",
+    };
+  }
+
+  // Common user mistake: setting app name instead of email address in SMTP_USER
+  if (rawUser && !rawUser.includes("@")) {
+    return {
+      isConfigured: false,
+      error: `Invalid SMTP_USER="${rawUser}". SMTP_USER must be your full email address (e.g., yourname@gmail.com), not the app nickname.`,
+    };
+  }
+
+  if (!rawPass) {
+    return {
+      isConfigured: false,
+      error: "SMTP_PASS (App Password) is missing in .env.local.",
+    };
+  }
+
+  return { isConfigured: true };
+}
+
+/**
  * Create SMTP Transporter from environment variables.
- * Returns null if credentials are not fully configured.
+ * Automatically handles Gmail, App Passwords with spaces, and standard SMTP.
  */
 export function getMailTransporter() {
-  const host = process.env.SMTP_HOST;
+  let host = process.env.SMTP_HOST?.trim() || "";
   const port = Number(process.env.SMTP_PORT || 587);
   const secure = process.env.SMTP_SECURE === "true" || port === 465;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+  const user = process.env.SMTP_USER?.trim() || "";
+  const pass = (process.env.SMTP_PASS?.trim() || "").replace(/\s+/g, ""); // Remove spaces from Google App Passwords
 
-  if (!host || !user || !pass) {
+  // Auto-detect Gmail if host is empty but user/pass looks like Gmail
+  if (!host && (user.includes("@gmail.com") || pass.length === 16)) {
+    host = "smtp.gmail.com";
+  }
+
+  if (!host || !user || !pass || !user.includes("@")) {
     return null;
   }
 
+  // Optimized Gmail config
+  if (host === "smtp.gmail.com" || user.endsWith("@gmail.com")) {
+    return nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user,
+        pass,
+      },
+    });
+  }
+
+  // Standard SMTP config
   return nodemailer.createTransport({
     host,
     port,
@@ -165,18 +216,27 @@ export function createVisitorAcknowledgementHtml(name: string): string {
  * Dispatches contact notification and visitor acknowledgement.
  */
 export async function sendContactEmails(data: ContactFormValues): Promise<EmailDispatchResult> {
-  const transporter = getMailTransporter();
-  const toEmail = process.env.CONTACT_TO_EMAIL || "dhilip.dev@example.com";
-  const fromEmail = process.env.CONTACT_FROM_EMAIL || "portfolio@dhilip.dev";
-  const timestamp = new Date().toUTCString();
-
-  if (!transporter) {
-    // If SMTP is not yet configured, log for development inspection and notify caller
-    console.warn("[Email Service] SMTP configuration missing. Check environment variables.");
+  const diagnostic = getSmtpDiagnostic();
+  if (!diagnostic.isConfigured) {
+    console.warn("[Email Service]", diagnostic.error);
     return {
       ownerDelivered: false,
       visitorAcknowledged: false,
-      error: "SMTP service is currently not configured on this server.",
+      error: diagnostic.error,
+    };
+  }
+
+  const transporter = getMailTransporter();
+  const userEmail = process.env.SMTP_USER?.trim() || "";
+  const toEmail = process.env.CONTACT_TO_EMAIL || userEmail || "dhilip.dev@example.com";
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || userEmail || "portfolio@dhilip.dev";
+  const timestamp = new Date().toUTCString();
+
+  if (!transporter) {
+    return {
+      ownerDelivered: false,
+      visitorAcknowledged: false,
+      error: "Unable to create SMTP mail transporter. Please check your SMTP credentials.",
     };
   }
 
@@ -209,16 +269,17 @@ ${data.message}
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : String(err);
     console.error("[Email Service] Failed to send owner notification:", errorMsg);
-    lastError = `Failed to deliver message to portfolio owner: ${errorMsg}`;
+    lastError = `Failed to deliver email via SMTP: ${errorMsg}`;
   }
 
   // 2. Send visitor acknowledgement (only if visitor email is valid)
-  try {
-    await transporter.sendMail({
-      from: `"Dhilip M" <${fromEmail}>`,
-      to: data.email,
-      subject: "Thanks for contacting Dhilip M",
-      text: `
+  if (ownerDelivered) {
+    try {
+      await transporter.sendMail({
+        from: `"Dhilip M" <${fromEmail}>`,
+        to: data.email,
+        subject: "Thanks for contacting Dhilip M",
+        text: `
 Hi ${data.name},
 
 Thank you for reaching out through my portfolio.
@@ -228,16 +289,13 @@ I've received your message and appreciate your interest. I'll review your enquir
 Best regards,
 Dhilip M
 Full Stack Developer
-      `.trim(),
-      html: createVisitorAcknowledgementHtml(data.name),
-    });
-    visitorAcknowledged = true;
-  } catch (err: unknown) {
-    const errorMsg = err instanceof Error ? err.message : String(err);
-    console.error("[Email Service] Failed to send visitor acknowledgement:", errorMsg);
-    // Note: Do not override owner error if owner failed
-    if (!lastError) {
-      lastError = `Visitor acknowledgement could not be sent: ${errorMsg}`;
+        `.trim(),
+        html: createVisitorAcknowledgementHtml(data.name),
+      });
+      visitorAcknowledged = true;
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : String(err);
+      console.error("[Email Service] Failed to send visitor acknowledgement:", errorMsg);
     }
   }
 

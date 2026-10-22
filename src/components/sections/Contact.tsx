@@ -191,7 +191,7 @@ export function Contact() {
 
                 {/* Name and Email row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
+                  <div suppressHydrationWarning>
                     <label
                       htmlFor="name"
                       className="block text-xs font-medium text-foreground mb-1.5"
@@ -201,6 +201,8 @@ export function Contact() {
                     <input
                       id="name"
                       type="text"
+                      autoComplete="name"
+                      suppressHydrationWarning
                       placeholder="e.g. Alex Morgan"
                       {...register("name")}
                       aria-invalid={!!errors.name}
@@ -216,7 +218,7 @@ export function Contact() {
                     )}
                   </div>
 
-                  <div>
+                  <div suppressHydrationWarning>
                     <label
                       htmlFor="email"
                       className="block text-xs font-medium text-foreground mb-1.5"
@@ -226,6 +228,8 @@ export function Contact() {
                     <input
                       id="email"
                       type="email"
+                      autoComplete="email"
+                      suppressHydrationWarning
                       placeholder="alex@company.com"
                       {...register("email")}
                       aria-invalid={!!errors.email}

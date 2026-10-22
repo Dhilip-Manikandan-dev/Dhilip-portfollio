@@ -91,24 +91,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactAp
     const emailResult = await sendContactEmails(data);
 
     if (!emailResult.ownerDelivered) {
-      // In development mode without SMTP configured, inform developer gracefully
-      if (process.env.NODE_ENV !== "production" && !process.env.SMTP_HOST) {
-        return NextResponse.json(
-          {
-            success: true,
-            message:
-              "Message received in development mode! (SMTP is not configured in .env.local yet, but submission validated successfully)",
-          },
-          { status: 200 }
-        );
-      }
-
       return NextResponse.json(
         {
           success: false,
           message:
             emailResult.error ||
-            "Unable to deliver message at this time. Please reach out via email or LinkedIn.",
+            "Unable to deliver message at this time. Please check your SMTP settings in .env.local.",
         },
         { status: 503 }
       );

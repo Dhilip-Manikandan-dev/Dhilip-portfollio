@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { createHeroEntrance } from "@/lib/animations";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
